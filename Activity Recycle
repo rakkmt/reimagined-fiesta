@@ -1,0 +1,63 @@
+override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        loginBtn = findViewById(R.id.login_btn)
+
+        loginBtn?.setOnClickListener {
+
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        System.out.println("// On Create Called")
+
+        loadApi() // Api method is been called [It shld start from small letter]
+    }
+
+    private fun loadApi() {
+        TODO("Not yet implemented")
+    }
+
+    private fun helloMethod() {
+
+        Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show()
+
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+
+        System.out.println("// On Start Called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        System.out.println("// On Resume Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        System.out.println("// On Pause Called")
+    }
+    override fun onStop() {
+        super.onStop()
+
+        System.out.println("// On Stop Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+
+        System.out.println("// On Restart Called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        System.out.println("// On Destroy Called")
+    }
+}
