@@ -4,18 +4,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
         System.out.println("// On Create Called")
     }
-
-    private fun loadApi() {
-        TODO("Not yet implemented")
-    }
-
-    private fun helloMethod() {
-
-        Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show()
-
-    }
-
-
+    
     override fun onStart() {
         super.onStart()
 
