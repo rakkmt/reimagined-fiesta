@@ -1,0 +1,2 @@
+title="Create"// (to change Name of the project in title bar)
+        supportActionBar?.hide() // to hide title bar
