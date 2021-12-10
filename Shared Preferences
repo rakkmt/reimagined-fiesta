@@ -1,0 +1,20 @@
+open class MyApplication : AppCompatActivity() {
+
+    // Method to save value in shared preferences
+    fun saveValue(key: String, value: String) {
+
+        val sharedPreferences = getSharedPreferences("sharedData", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.apply() {
+            putString(key, value)
+        }.apply()
+    }
+
+    // Method to show Saved Value
+    fun showValue(key: String): String? {
+
+        val sharedPreferences = getSharedPreferences("sharedData", Context.MODE_PRIVATE)
+        val savedValue = sharedPreferences.getString(key,"")
+        return savedValue
+    }
+}
