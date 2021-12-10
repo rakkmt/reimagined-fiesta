@@ -1,0 +1,4 @@
+Themes.xml[Night]
+<style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+</style>
