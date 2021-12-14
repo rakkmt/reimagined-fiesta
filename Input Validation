@@ -1,0 +1,28 @@
+   // implementation of method
+    if (inputValidation()) {
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finishAffinity()
+            }
+            
+     //method       
+     private fun inputValidation(): Boolean {
+
+        if (phoneEdit?.text!!.length==0) {
+            phoneEdit!!.setError("Phone number cannot be empty")
+            return false
+        }
+
+        if (phoneEdit?.text!!.length!=10) {
+            phoneEdit!!.setError("Invalid number")
+            return false
+        }
+
+        if (passwordEdit?.text!!.length==0) {
+            passwordEdit!!.setError("Password cannot be empty")
+            return false
+        }
+        return true
+    }
+           
