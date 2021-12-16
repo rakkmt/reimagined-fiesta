@@ -1,3 +1,7 @@
+//MANIFEST
+ <uses-permission android:name="android.permission.CAMERA"/>
+
+//MAINACTIVITY
 class MainActivity : AppCompatActivity() {
 
     var button :Button?=null
