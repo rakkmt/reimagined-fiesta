@@ -9,6 +9,10 @@ STEP 1: AndroidManifest.xml
             android:resource="@xml/fileprovider"/>
         </provider>
         
+//NOTE
+PackageName should be changed according to project name
+
+        
 STEP 2: Create fileprovider.xml
 <paths>
     <external-path
