@@ -1,8 +1,6 @@
 //MANIFEST
  <uses-permission android:name="android.permission.CAMERA"/>
  
-//NOTE
-PackageName should be changed according to project name
 
 //MAINACTIVITY
 class MainActivity : AppCompatActivity() {
