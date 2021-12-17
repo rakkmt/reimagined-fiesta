@@ -1,4 +1,7 @@
-MAIN ACTIVITY
+//NOTE
+PackageName should be changed according to project name
+
+//MAIN ACTIVITY
 
     private lateinit var button: Button
     private lateinit var imageView: ImageView
