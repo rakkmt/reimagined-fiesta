@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             photoFile = getPhotoFile(FILE_NAME)
             val fileProvider= FileProvider.getUriForFile(this,"com.mca.newimageproject.fileprovider", photoFile )
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,fileProvider)
+            takePictureIntent.putExtra("android.intent.extras.CAMERA_FACING", 1)                      //FRONT CAMERA
             if (takePictureIntent.resolveActivity(this.packageManager) != null) {
                 startActivityForResult(takePictureIntent, REQUEST_CODE)
             }else
