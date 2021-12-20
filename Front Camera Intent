@@ -1,0 +1,7 @@
+STEP 1: MANIFEST 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+STEP 2:SHOULD BE ADDED IN INTENT
+    takePictureIntent.putExtra("android.intent.extras.CAMERA_FACING", 1) 
+           
