@@ -1,0 +1,103 @@
+Step1:
+buil gradle module:ADD above compileOptions 
+
+    buildFeatures{
+        viewBinding true;
+    }
+        
+Step2: Linear Layout
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To:"
+        android:textColor="@color/black"
+        android:layout_margin="16dp"
+        android:textSize="26sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/emailAddress"
+        android:layout_marginHorizontal="16dp"
+        android:hint="Email Address"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subject:"
+        android:textColor="@color/black"
+        android:layout_margin="16dp"
+        android:textSize="26sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/subject"
+        android:layout_marginHorizontal="16dp"
+        android:hint="Subject"
+         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message:"
+        android:textColor="@color/black"
+        android:layout_margin="16dp"
+        android:textSize="26sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/message"
+        android:layout_marginHorizontal="16dp"
+        android:hint="Type your message here"
+        android:lines="10"
+        android:gravity="start"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/sendBtn"
+        android:text="SEND"
+        android:textSize="26dp"
+        android:layout_margin="26dp"/>
+
+ Step3:
+ 
+    lateinit var binding : ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.sendBtn.setOnClickListener {
+
+            val email = binding.emailAddress.text.toString()
+            val subject = binding.subject.text.toString()
+            val message= binding.message.text.toString()
+
+            val addresses= email.split(",".toRegex()).toTypedArray()
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL,addresses)
+                putExtra(Intent.EXTRA_SUBJECT,subject)
+                putExtra(Intent.EXTRA_TEXT,message)
+
+            }
+
+            if(intent.resolveActivity(packageManager)!=null){
+                startActivity(intent)
+            }else{
+                Toast.makeText(this@MainActivity,"Required App is not installed", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        
+
+
+
