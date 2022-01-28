@@ -1,0 +1,265 @@
+Step 1: Add this in the build gradle module 
+       implementation 'de.hdodenhof:circleimageview:3.1.0'
+       
+       
+Step 2: In activity xml change layouts and create new xml files 
+      On layout ,,new.. Lyout Resource file for Nav_header
+      
+      <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp"
+    android:background="@color/white">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/flower"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_name"
+        android:paddingTop="8dp"
+        android:textSize="20dp"
+        android:text="Raks"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="raks@gmail.com"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/underLine"/>
+</LinearLayout>
+      
+      
+Step 3: in resource create new Android resource directory in that values will be menu 
+        in menu again create New Resource File ... File name as nav_menu
+        
+        In nav_menu
+        
+        <?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_baseline_home_24"/>
+
+    <item
+        android:id="@+id/nav_message"
+        android:title="Message"
+        android:icon="@drawable/ic_baseline_message_24"/>
+
+    <item
+        android:id="@+id/nav_sync"
+        android:title="Sync"
+        android:icon="@drawable/ic_baseline_sync_24"/>
+
+    <item
+        android:id="@+id/nav_trash"
+        android:title="Trash"
+        android:icon="@drawable/ic_baseline_delete_24"/>
+
+    <item
+        android:id="@+id/nav_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_baseline_settings_24"/>
+
+    </group>
+
+    <item android:title="Profile">
+
+        <menu>
+
+
+            <group>
+            <item
+                android:icon="@drawable/ic_baseline_login_24"
+                android:id="@+id/nav_login"
+                android:title="Login"
+                />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Communicate">
+
+
+        <menu>
+            <group>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_baseline_share_24"
+                android:title="share"/>
+
+            <item
+                android:id="@+id/nav_rate_us"
+                android:icon="@drawable/ic_baseline_star_rate_24"
+                android:title="Rate Us"/>
+
+
+
+            </group>
+
+        </menu>
+    </item>
+
+
+
+
+</menu>
+
+
+for creating icon
+On drawable create new ..in Vector Asset
+
+
+
+Step 4:
+package com.mca.navigationdrawer
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
+
+class MainActivity : AppCompatActivity() {
+
+    lateinit var toggle: ActionBarDrawerToggle
+    lateinit var drawerLayout: DrawerLayout
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        drawerLayout = findViewById(R.id.drawerLayout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
+
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+        navView.setNavigationItemSelectedListener {
+
+            it.isChecked = true
+            when (it.itemId) {
+                R.id.nav_home -> replaceFragment(HomeFragment(),it.title.toString())
+                R.id.nav_message ->  replaceFragment(MessageFragment(),it.title.toString())
+                R.id.nav_sync -> Toast.makeText(
+                    applicationContext,
+                    "Clicked Sync",
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.nav_trash -> Toast.makeText(
+                    applicationContext,
+                    "Clicked Delete",
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.nav_settings ->  replaceFragment(SettingsFragment(),it.title.toString())
+                R.id.nav_login -> Toast.makeText(
+                    applicationContext,
+                    "Clicked Login",
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.nav_share -> Toast.makeText(
+                    applicationContext,
+                    "Clicked Share",
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.nav_rate_us -> Toast.makeText(
+                    applicationContext,
+                    "Clicked Rate Us",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+            true
+        }
+
+    }
+
+    private fun replaceFragment(fragment: Fragment, title: String){
+
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frameLayout,fragment)
+        fragmentTransaction.commit()
+        drawerLayout.closeDrawers()
+        setTitle(title)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        if (toggle.onOptionsItemSelected(item))
+        {
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+}
+
+
+Step 5:
+Create new in fragement blank name the file as required home fragement etc etc
+Create new xml file 
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/teal_700"
+    tools:context=".HomeFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="60dp"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:id="@+id/btn"
+        android:backgroundTint="#EDC039"
+        android:textColorHint="@color/black"
+        />
+
+
+</RelativeLayout>
+in each xml file add above code
+
+Done
+
+      
+  
+         
+ 
+       
